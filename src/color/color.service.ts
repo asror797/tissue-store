@@ -1,19 +1,28 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateColorDto } from './dto/create-color.dto';
 import { UpdateColorDto } from './dto/update-color.dto';
+import { Color } from './entities/color.entity';
 
 @Injectable()
 export class ColorService {
+
+  constructor(@InjectRepository(Color) private repo:Repository<Color>){}
+
   create(createColorDto: CreateColorDto) {
-    return 'This action adds a new color';
+
+    const color = this.repo.create(createColorDto)
+
+    return  this.repo.save(color);
   }
 
   findAll() {
-    return `This action returns all color`;
+    return this.repo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} color`;
+  findOne(id: string) {
+    return this.repo.findOne({where:{id:id}});
   }
 
   update(id: number, updateColorDto: UpdateColorDto) {

@@ -19,7 +19,7 @@ export class ColorController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.colorService.findOne(+id);
+    return this.colorService.findOne(id);
   }
 
   @Patch(':id')
