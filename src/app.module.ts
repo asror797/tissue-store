@@ -7,6 +7,10 @@ import { ModelModule } from './model/model.module';
 import { ColorModule } from './color/color.module';
 import { Color } from './color/entities/color.entity';
 import { TissueModule } from './tissue/tissue.module';
+import { Tissue } from './tissue/entities/tissue.entity';
+import { ReservationModule } from './reservation/reservation.module';
+import { Reservation } from './reservation/entities/reservation.entity';
+import { ReplaceModule } from './replace/replace.module';
 
 @Module({
   imports: [
@@ -17,12 +21,15 @@ import { TissueModule } from './tissue/tissue.module';
       password:'aaa13579#',
       database:'storetissue',
       host:'localhost',
-      entities:[Model,Color],
+      entities:[Model,Color,Tissue,Reservation],
       synchronize:true
     }),
     ModelModule,
     ColorModule,
-    TissueModule],
+    TissueModule,
+    ReservationModule,
+    ReplaceModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

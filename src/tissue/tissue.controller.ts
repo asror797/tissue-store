@@ -2,10 +2,16 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TissueService } from './tissue.service';
 import { CreateTissueDto } from './dto/create-tissue.dto';
 import { UpdateTissueDto } from './dto/update-tissue.dto';
+import { ColorService } from 'src/color/color.service';
+import { ModelService } from 'src/model/model.service';
 
 @Controller('tissue')
 export class TissueController {
-  constructor(private readonly tissueService: TissueService) {}
+  constructor(
+    private readonly tissueService: TissueService,
+    private readonly colorService: ColorService,
+    private readonly modelService: ModelService
+  ) {}
 
   @Post()
   create(@Body() createTissueDto: CreateTissueDto) {
@@ -19,7 +25,7 @@ export class TissueController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.tissueService.findOne(+id);
+    return this.tissueService.findOne(id);
   }
 
   @Patch(':id')
@@ -29,6 +35,6 @@ export class TissueController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.tissueService.remove(+id);
+    return this.tissueService.remove(id);
   }
 }

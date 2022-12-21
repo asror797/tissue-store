@@ -1,4 +1,5 @@
-import { Entity , Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Tissue } from "src/tissue/entities/tissue.entity";
+import { Entity , Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 
 @Entity({name:'color'})
 export class Color {
@@ -16,6 +17,9 @@ export class Color {
       length:64
    })
    number:string
+
+   @OneToMany(() => Tissue , tissue => tissue.color)
+   tissue:Tissue[]
 
    @CreateDateColumn()
    created_at:string
