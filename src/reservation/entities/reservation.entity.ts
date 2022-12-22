@@ -18,6 +18,12 @@ export class Reservation {
    })
    is_taken:boolean
 
+   // @Column({
+   //    type:'bigint',
+   //    nullable:false
+   // })
+   // remains_amount:number
+
    @ManyToOne(() => Tissue , tissue => tissue.reservation)
    tissue:Tissue
 

@@ -7,6 +7,8 @@ import { Color } from 'src/color/entities/color.entity';
 import { Model } from 'src/model/entities/model.entity';
 import { ColorService } from 'src/color/color.service';
 import { ModelService } from 'src/model/model.service';
+import { TakenService } from 'src/taken/taken.service';
+import { Taken } from 'src/taken/entities/taken.entity';
 
 @Module({
   imports:[

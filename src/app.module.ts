@@ -11,6 +11,9 @@ import { Tissue } from './tissue/entities/tissue.entity';
 import { ReservationModule } from './reservation/reservation.module';
 import { Reservation } from './reservation/entities/reservation.entity';
 import { ReplaceModule } from './replace/replace.module';
+import { TakenModule } from './taken/taken.module';
+import { Taken } from './taken/entities/taken.entity';
+import { Replace } from './replace/entities/replace.entity';
 
 @Module({
   imports: [
@@ -21,14 +24,15 @@ import { ReplaceModule } from './replace/replace.module';
       password:'aaa13579#',
       database:'storetissue',
       host:'localhost',
-      entities:[Model,Color,Tissue,Reservation],
+      entities:[Model,Color,Tissue,Reservation,Taken,Replace],
       synchronize:true
     }),
     ModelModule,
     ColorModule,
     TissueModule,
     ReservationModule,
-    ReplaceModule
+    ReplaceModule,
+    TakenModule
   ],
   controllers: [AppController],
   providers: [AppService],

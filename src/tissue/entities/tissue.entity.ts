@@ -1,7 +1,8 @@
 import { Color } from "src/color/entities/color.entity";
 import { Model } from "src/model/entities/model.entity";
 import { Reservation } from "src/reservation/entities/reservation.entity";
-import { Entity , Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { Taken } from "src/taken/entities/taken.entity";
+import { Entity , Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToMany } from "typeorm";
 
 @Entity({name:'tissue'})
 export class Tissue {
@@ -16,6 +17,9 @@ export class Tissue {
 
    @OneToMany(() => Reservation , reservation => reservation.tissue)
    reservation:Reservation[]
+
+   @ManyToMany(() => Taken ,taken => taken.tissue)
+   taken:Taken[]
 
    @Column({
       type:'bigint',
