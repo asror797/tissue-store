@@ -23,7 +23,7 @@ export class ReservationService {
   }
 
   findAll() {
-    return this.repo.find({relations:['tissue']});
+    return this.repo.find({relations:['tissue','tissue.model']});
   }
 
   findOne(id: string) {

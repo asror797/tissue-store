@@ -14,6 +14,8 @@ import { ReplaceModule } from './replace/replace.module';
 import { TakenModule } from './taken/taken.module';
 import { Taken } from './taken/entities/taken.entity';
 import { Replace } from './replace/entities/replace.entity';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -32,7 +34,9 @@ import { Replace } from './replace/entities/replace.entity';
     TissueModule,
     ReservationModule,
     ReplaceModule,
-    TakenModule
+    TakenModule,
+    UsersModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
