@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ReplaceService } from './replace.service';
 import { CreateReplaceDto } from './dto/create-replace.dto';
 import { UpdateReplaceDto } from './dto/update-replace.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('replace')
+@UseGuards(new JwtAuthGuard())
 export class ReplaceController {
   constructor(private readonly replaceService: ReplaceService) {}
 

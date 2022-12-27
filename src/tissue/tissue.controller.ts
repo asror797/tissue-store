@@ -1,11 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { TissueService } from './tissue.service';
 import { CreateTissueDto } from './dto/create-tissue.dto';
 import { UpdateTissueDto } from './dto/update-tissue.dto';
 import { ColorService } from 'src/color/color.service';
 import { ModelService } from 'src/model/model.service';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('tissue')
+@UseGuards( new JwtAuthGuard())
 export class TissueController {
   constructor(
     private readonly tissueService: TissueService,
