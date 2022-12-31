@@ -8,7 +8,7 @@ export class Taken {
    id:string
 
    @Column({
-      type:'bigint',
+      type:'decimal',
       nullable:false
    }) 
    amount:number

@@ -22,7 +22,7 @@ export class Tissue {
    taken:Taken[]
 
    @Column({
-      type:'bigint',
+      type:'decimal',
       nullable:false
    })
    amount:number

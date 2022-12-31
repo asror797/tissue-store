@@ -24,7 +24,7 @@ import { AuthModule } from './auth/auth.module';
       username:'asror',
       port:5432,
       password:'aaa13579#',
-      database:'storetissue',
+      database:'tissuestore',
       host:'localhost',
       entities:[Model,Color,Tissue,Reservation,Taken,Replace],
       synchronize:true

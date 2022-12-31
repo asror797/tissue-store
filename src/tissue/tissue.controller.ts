@@ -5,14 +5,13 @@ import { UpdateTissueDto } from './dto/update-tissue.dto';
 import { ColorService } from 'src/color/color.service';
 import { ModelService } from 'src/model/model.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { AddTissueDto } from './dto/add-tissue.dto';
 
 @Controller('tissue')
 @UseGuards( new JwtAuthGuard())
 export class TissueController {
   constructor(
-    private readonly tissueService: TissueService,
-    private readonly colorService: ColorService,
-    private readonly modelService: ModelService
+    private readonly tissueService: TissueService
   ) {}
 
   @Post()
@@ -30,9 +29,21 @@ export class TissueController {
     return this.tissueService.findOne(id);
   }
 
+  @Patch('/add/:id')
+  addTissue(@Param('id') id:string , @Body() addTissueDto:AddTissueDto) {
+    return this.tissueService.addTissue(id,addTissueDto)
+  }
+
+  @Patch('/take/:id')
+  takeTissue(@Param('id') id:string , @Body() addTissueDto:AddTissueDto) {
+    return this.tissueService.takeTissue(id,addTissueDto)
+  }
+
+  
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTissueDto: UpdateTissueDto) {
-    return this.tissueService.update(+id, updateTissueDto);
+    return this.tissueService.update(id, updateTissueDto);
   }
 
   @Delete(':id')
