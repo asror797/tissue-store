@@ -23,11 +23,11 @@ import { History } from './history/entities/history.entity';
   imports: [
     TypeOrmModule.forRoot({
       type:'postgres',
-      username:'asror',
+      username:'wqcvyshu',
       port:5432,
-      password:'aaa13579#',
-      database:'tissuestore',
-      host:'localhost',
+      password:'igEQdvMjVZaSsQsYDVPgkYR_lz7rw2HN',
+      database:'wqcvyshu',
+      host:'arjuna.db.elephantsql.com',
       entities:[Model,Color,Tissue,Reservation,Taken,Replace,History],
       synchronize:true
     }),
