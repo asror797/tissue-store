@@ -1,4 +1,5 @@
 import { Color } from "src/color/entities/color.entity";
+import { History } from "src/history/entities/history.entity";
 import { Model } from "src/model/entities/model.entity";
 import { Reservation } from "src/reservation/entities/reservation.entity";
 import { Taken } from "src/taken/entities/taken.entity";
@@ -20,6 +21,9 @@ export class Tissue {
 
    @ManyToMany(() => Taken ,taken => taken.tissue)
    taken:Taken[]
+
+   @OneToMany(() => History , history => history.tissue)
+   added:History[]
 
    @Column({
       type:'decimal',

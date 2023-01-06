@@ -7,7 +7,7 @@ import { CreateTissueDto } from './dto/create-tissue.dto';
 import { UpdateTissueDto } from './dto/update-tissue.dto';
 import { AddTissueDto } from './dto/add-tissue.dto';
 import { Tissue } from './entities/tissue.entity';
-import { Taken } from 'src/taken/entities/taken.entity';
+
 
 @Injectable()
 export class TissueService {
@@ -22,7 +22,7 @@ export class TissueService {
   async create(createTissueDto:CreateTissueDto) {
 
     const tissue = new Tissue()
-    tissue.amount = Number(createTissueDto.amount)
+    tissue.amount = Number(createTissueDto.amount) >= 0 ? Number(createTissueDto.amount) :  0
     tissue.model = await this.model.findOne({where:{id:createTissueDto.model}})
     tissue.color = await this.color.findOne({where:{id:createTissueDto.color}})
     
@@ -30,7 +30,9 @@ export class TissueService {
   }
 
   findAll() {
-    return this.repo.find({relations:['model','color']});
+    return this.repo.find({relations:['model','color'],order:{
+      amount:'ASC'
+    }});
   }
 
   findOne(id: string) {

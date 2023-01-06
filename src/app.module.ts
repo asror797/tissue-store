@@ -16,6 +16,8 @@ import { Taken } from './taken/entities/taken.entity';
 import { Replace } from './replace/entities/replace.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { HistoryModule } from './history/history.module';
+import { History } from './history/entities/history.entity';
 
 @Module({
   imports: [
@@ -26,7 +28,7 @@ import { AuthModule } from './auth/auth.module';
       password:'aaa13579#',
       database:'tissuestore',
       host:'localhost',
-      entities:[Model,Color,Tissue,Reservation,Taken,Replace],
+      entities:[Model,Color,Tissue,Reservation,Taken,Replace,History],
       synchronize:true
     }),
     ModelModule,
@@ -36,7 +38,8 @@ import { AuthModule } from './auth/auth.module';
     ReplaceModule,
     TakenModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    HistoryModule
   ],
   controllers: [AppController],
   providers: [AppService],

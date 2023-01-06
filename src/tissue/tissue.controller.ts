@@ -2,16 +2,18 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { TissueService } from './tissue.service';
 import { CreateTissueDto } from './dto/create-tissue.dto';
 import { UpdateTissueDto } from './dto/update-tissue.dto';
-import { ColorService } from 'src/color/color.service';
-import { ModelService } from 'src/model/model.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { AddTissueDto } from './dto/add-tissue.dto';
+import { HistoryService } from 'src/history/history.service';
+import { TakenService } from 'src/taken/taken.service';
 
 @Controller('tissue')
 @UseGuards( new JwtAuthGuard())
 export class TissueController {
   constructor(
-    private readonly tissueService: TissueService
+    private readonly tissueService: TissueService,
+    private readonly historyService: HistoryService,
+    private readonly takenService: TakenService
   ) {}
 
   @Post()
@@ -31,6 +33,8 @@ export class TissueController {
 
   @Patch('/add/:id')
   addTissue(@Param('id') id:string , @Body() addTissueDto:AddTissueDto) {
+
+    const added = this.historyService.create({amount:45,comment:'ass'})
     return this.tissueService.addTissue(id,addTissueDto)
   }
 
