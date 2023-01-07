@@ -2,14 +2,25 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { HistoryService } from './history.service';
 import { CreateHistoryDto } from './dto/create-history.dto';
 import { UpdateHistoryDto } from './dto/update-history.dto';
+import { TissueService } from 'src/tissue/tissue.service';
 
 @Controller('history')
 export class HistoryController {
-  constructor(private readonly historyService: HistoryService) {}
+  constructor(
+    private readonly historyService: HistoryService,
+    private readonly tissueService: TissueService
+  ) {}
 
-  @Post()
-  create(@Body() createHistoryDto: CreateHistoryDto) {
-    return this.historyService.create(createHistoryDto);
+  @Post('/:id')
+  async create( @Param('id') id:string ,@Body() createHistoryDto: CreateHistoryDto) {
+
+    const added = await this.tissueService.addTissue(id,{amount:createHistoryDto.amount})
+
+    if(added) {
+      return this.historyService.create(id ,createHistoryDto);
+    } else {
+      return {message:'error'}
+    }
   }
 
   @Get()

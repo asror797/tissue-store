@@ -3,15 +3,27 @@ import { TakenService } from './taken.service';
 import { CreateTakenDto } from './dto/create-taken.dto';
 import { UpdateTakenDto } from './dto/update-taken.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { TissueService } from 'src/tissue/tissue.service';
 
 @Controller('taken')
 @UseGuards(new JwtAuthGuard())
 export class TakenController {
-  constructor(private readonly takenService: TakenService) {}
+  constructor(
+    private readonly takenService: TakenService,
+    private readonly tissueService: TissueService
+  ) {}
 
-  @Post()
-  create(@Body() createTakenDto: CreateTakenDto) {
-    return this.takenService.create(createTakenDto);
+  @Post(':id')
+  async create(@Param('id') id:string , @Body() createTakenDto: CreateTakenDto) {
+
+    const takenTissue =  await this.tissueService.takeTissue(id,{amount:createTakenDto.amount})
+
+    if(takenTissue) {
+      return this.takenService.create(createTakenDto);
+    } else {
+      return { message:"error"}
+    }
+
   }
 
   @Get()

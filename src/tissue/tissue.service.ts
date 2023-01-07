@@ -21,12 +21,27 @@ export class TissueService {
 
   async create(createTissueDto:CreateTissueDto) {
 
-    const tissue = new Tissue()
-    tissue.amount = Number(createTissueDto.amount) >= 0 ? Number(createTissueDto.amount) :  0
-    tissue.model = await this.model.findOne({where:{id:createTissueDto.model}})
-    tissue.color = await this.color.findOne({where:{id:createTissueDto.color}})
-    
-    return this.repo.save(tissue);
+
+    const is_there = await this.repo.findOne({where:{
+      model:{
+        id:createTissueDto.model
+      },
+      color:{
+        id:createTissueDto.color
+      }
+    }})
+
+    if(!is_there) {
+      const tissue = new Tissue()
+      tissue.amount = Number(createTissueDto.amount) >= 0 ? Number(createTissueDto.amount) :  0
+      tissue.model = await this.model.findOne({where:{id:createTissueDto.model}})
+      tissue.color = await this.color.findOne({where:{id:createTissueDto.color}})
+      
+      return this.repo.save(tissue);
+    } else {
+      return { message:"Bunday material mavjud"}
+    }
+
   }
 
   findAll() {
@@ -50,15 +65,13 @@ export class TissueService {
     return await this.repo.update(id,{amount:Number(added.amount)+addTissueDto.amount});
   }
 
-  async takeTissue(id:string,addTissueDto) {
+  async takeTissue(id:string,addTissueDto:AddTissueDto) {
     const added = await this.repo.findOne({where:{id:id}})
+
 
     if(!added) {
       return {};
     }
-
-
-
     return await this.repo.update(id,{amount:added.amount-addTissueDto.amount});
   }
 
@@ -84,6 +97,4 @@ export class TissueService {
 
     return this.repo.delete(id);
   }
-
-
 }

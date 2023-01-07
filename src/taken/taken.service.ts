@@ -15,7 +15,6 @@ export class TakenService {
   ){}
 
   async create(createTakenDto: CreateTakenDto) {
-
     const taken = new Taken()
     taken.amount = createTakenDto.amount
     taken.comment = createTakenDto.comment
@@ -25,7 +24,7 @@ export class TakenService {
   }
 
   findAll() {
-    return this.repo.find({relations:['replace']});
+    return this.repo.find({relations:['replace','tissue']});
   }
 
   findOne(id: string) {

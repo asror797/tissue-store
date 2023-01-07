@@ -23,7 +23,11 @@ import { History } from './history/entities/history.entity';
   imports: [
     TypeOrmModule.forRoot({
       type:'postgres',
+      // username:'asror',
+      // password:'aaa13579#',
       username:'wqcvyshu',
+      // host:'localhost',
+      // database:'storetissue',
       port:5432,
       password:'igEQdvMjVZaSsQsYDVPgkYR_lz7rw2HN',
       database:'wqcvyshu',

@@ -11,7 +11,7 @@ export class History {
       type:'decimal',
       nullable:false
    })
-   amount:string
+   amount:number
 
    @Column({
       type:'varchar',
